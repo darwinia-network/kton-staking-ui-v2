@@ -2,7 +2,7 @@ name: Check pull request
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -35,4 +35,27 @@ jobs:
 
       - name: Test build
         run: pnpm build
+
+      - name: Notify GitHub Pages repository
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GITHUB_PAGES_DISPATCH_TOKEN: ${{ secrets.KTON_GITHUB_PAGES_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "${GITHUB_PAGES_DISPATCH_TOKEN}" ]; then
+            echo "::warning title=GitHub Pages dispatch skipped::KTON_GITHUB_PAGES_DISPATCH_TOKEN is not configured"
+            exit 0
+          fi
+
+          curl --fail-with-body \
+            --request POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer ${GITHUB_PAGES_DISPATCH_TOKEN}" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/ktondao/ktondao.github.io/dispatches \
+            --data "$(jq -nc \
+              --arg event_type "kton-staking-updated" \
+              --arg source_repository "${GITHUB_REPOSITORY}" \
+              --arg source_ref "${GITHUB_REF_NAME}" \
+              --arg source_sha "${GITHUB_SHA}" \
+              '{event_type: $event_type, client_payload: {source_repository: $source_repository, source_ref: $source_ref, source_sha: $source_sha}}')"
 

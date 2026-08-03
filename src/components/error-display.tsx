@@ -1,6 +1,8 @@
 'use client';
 import Image from 'next/image';
 
+import { assetPath } from '@/config/assets';
+
 import GhostButton from './ui/ghost-button';
 
 interface Props {
@@ -17,7 +19,7 @@ const ErrorDisplay = ({ buttonText, action, title, message }: Props) => {
         width={230}
         height={200}
         alt={title}
-        src="/images/common/error.png"
+        src={assetPath('/images/common/error.png')}
         className="h-[12.5rem] w-[14.36225rem] shrink-0"
       />
 

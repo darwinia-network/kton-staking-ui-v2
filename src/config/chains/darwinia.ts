@@ -1,3 +1,4 @@
+import { assetPath } from '@/config/assets';
 import { ChainId, ChainConfig } from '@/types/chains';
 
 export const darwinia: ChainConfig = {
@@ -34,7 +35,7 @@ export const darwinia: ChainConfig = {
   /**
    * rainbowkit iconUrl
    */
-  iconUrl: '/images/chains/darwinia.png',
+  iconUrl: assetPath('/images/chains/darwinia.png'),
   daoUrl: 'gov.ktondao.xyz',
 
   /**
@@ -43,13 +44,13 @@ export const darwinia: ChainConfig = {
   nativeToken: {
     symbol: 'RING',
     decimals: 18,
-    logoPath: '/images/token/ring.svg'
+    logoPath: assetPath('/images/token/ring.svg')
   },
   ktonToken: {
     address: '0x0000000000000000000000000000000000000402',
     symbol: 'KTON',
     decimals: 18,
-    logoPath: '/images/token/kton.svg'
+    logoPath: assetPath('/images/token/kton.svg')
   },
   stakingContractAddress: '0xB633Ad1142941CA2Eb9C350579cF88BbE266660D'
 } as const satisfies ChainConfig;

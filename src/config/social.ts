@@ -1,10 +1,12 @@
+import { assetPath } from '@/config/assets';
+
 type SocialConfig = { url: string; name: string; iconPath: string };
 
 function createSocialConfig(name: string, url: string): SocialConfig {
   return {
     name,
     url,
-    iconPath: `/images/social/${name.toLowerCase()}.svg`,
+    iconPath: assetPath(`/images/social/${name.toLowerCase()}.svg`),
   };
 }
 
