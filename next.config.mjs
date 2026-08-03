@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  basePath: '/staking',
+  trailingSlash: true,
   output: 'export',
   images: {
     unoptimized: true

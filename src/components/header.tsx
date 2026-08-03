@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import ConnectButton from '@/components/connect-button';
+import { assetPath } from '@/config/assets';
 import { useAppAutoConnect } from '@/hooks/useAppAutoConnect';
 import { useChain } from '@/hooks/useChain';
 
@@ -14,7 +15,7 @@ const Header = () => {
       <div className="mx-auto flex h-full w-full items-center justify-between px-8">
         <Link href="/" title="darwinia" className="hidden md:inline ">
           <Image
-            src={'/images/common/ktonDaoV2.png'}
+            src={assetPath('/images/common/ktonDaoV2.png')}
             alt="ktonDaoV2 logo"
             priority
             width={154}
